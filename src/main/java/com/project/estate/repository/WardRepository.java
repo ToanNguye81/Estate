@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.project.estate.model.Ward;
 
-public interface IWardRepository extends JpaRepository<Ward, Long> {
+public interface WardRepository extends JpaRepository<Ward, Long> {
 
 }

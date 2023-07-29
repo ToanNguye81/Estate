@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.estate.model.Country;
 import com.project.estate.model.Region;
-import com.project.estate.repository.ICountryRepository;
-import com.project.estate.repository.IRegionRepository;
+import com.project.estate.repository.CountryRepository;
+import com.project.estate.repository.RegionRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,9 +34,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class RegionController {
 
     @Autowired
-    IRegionRepository pIRegionRepository;
+    RegionRepository pIRegionRepository;
     @Autowired
-    ICountryRepository pICountryRepository;
+    CountryRepository pICountryRepository;
 
     // Get region by id
     @GetMapping("/regions/{id}")

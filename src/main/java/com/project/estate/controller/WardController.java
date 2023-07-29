@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.estate.model.District;
 import com.project.estate.model.Ward;
-import com.project.estate.repository.IDistrictRepository;
-import com.project.estate.repository.IWardRepository;
+import com.project.estate.repository.DistrictRepository;
+import com.project.estate.repository.WardRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,9 +34,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class WardController {
 
     @Autowired
-    IDistrictRepository pIDistrictRepository;
+    DistrictRepository pIDistrictRepository;
     @Autowired
-    IWardRepository pIWardRepository;
+    WardRepository pIWardRepository;
 
     // get all ward
     @GetMapping(value = "/ward/all")

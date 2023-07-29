@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.project.estate.model.Province;
 
-public interface IProvinceRepository extends JpaRepository<Province, Long> {
+public interface ProvinceRepository extends JpaRepository<Province, Long> {
 
     Optional<Province> findByCode(String provinceCode);
 

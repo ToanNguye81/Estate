@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.estate.model.District;
 import com.project.estate.model.Province;
-import com.project.estate.repository.IDistrictRepository;
-import com.project.estate.repository.IProvinceRepository;
+import com.project.estate.repository.DistrictRepository;
+import com.project.estate.repository.ProvinceRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,9 +33,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class DistrictController {
 
     @Autowired
-    IDistrictRepository pIDistrictRepository;
+    DistrictRepository pIDistrictRepository;
     @Autowired
-    IProvinceRepository pIProvinceRepository;
+    ProvinceRepository pIProvinceRepository;
 
     // get all district
     @GetMapping(value = "/district/all")
