@@ -11,43 +11,36 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "customers")
-public class Customer extends User {
+@Table(name = "customer")
+public class Customer extends BaseEntity {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotNull(message = "Input First Name")
-    @Size(min = 2, message = "First Name at least 2 characters ")
+    @NotNull(message = "Input contact name")
+    @Size(min = 2, message = "contact name at least 2 characters ")
     @Column(name = "contactName")
     private String contactName;
 
-    @NotNull(message = "Input Last Name")
-    @Size(min = 2, message = "Last Name at least 2 characters ")
+    @NotNull(message = "Input Contact title")
+    @Size(min = 2, message = "Contact title at least 2 characters ")
     @Column(name = "contactTitle")
     private String contactTitle;
 
-    @NotNull(message = "Input phone")
-    @Size(min = 10, max = 10, message = "Phone Number have 10 digitals")
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "mobile", unique = true)
     private String mobile;
 
     @Column(name = "email", unique = true)
-    @NotNull(message = "Input email")
     @Email(message = "Email not valid")
     private String email;
 
-    @NotNull(message = "Input address ")
-    @Size(min = 2, message = "address at least 2 characters ")
-    @Column(name = "address")
-    private String address;
-
-    @NotNull(message = "Input note")
     @Column(name = "note")
     private String note;
 
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
+    private User user;
+    
     public Customer() {
         super();
         // TODO Auto-generated constructor stub

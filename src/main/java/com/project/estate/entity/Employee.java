@@ -1,22 +1,31 @@
 package com.project.estate.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.apache.commons.math3.stat.descriptive.summary.Product;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "employees")
+@Table(name = "employee")
 @Entity
-public class Employee extends User {
+public class Employee {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotNull(message = "Nhập First Name")
     @Size(min = 2, message = "First Name at least 2 characters ")
@@ -31,16 +40,16 @@ public class Employee extends User {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "litleOfCourtesy")
+    @Column(name = "titleOfCourtesy")
     private String titleOfCourtesy;
 
     @Column(name = "birthDate")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+7")
-    private String birthDate;
+    private Date birthDate;
 
     @Column(name = "hireDate")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+7")
-    private String hireDate;
+    private Date hireDate;
 
     @Column(name = "address")
     private String address;
@@ -82,5 +91,13 @@ public class Employee extends User {
 
     @Column(name = "profile")
     private String profile;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
+    private User user;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Role> roles;
 
 }
