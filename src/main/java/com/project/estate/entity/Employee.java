@@ -27,12 +27,12 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Nhập First Name")
+    @NotNull(message = "input First Name")
     @Size(min = 2, message = "First Name at least 2 characters ")
     @Column(name = "firstName")
     private String firstName;
 
-    @NotNull(message = "Nhập Last Name")
+    @NotNull(message = "input Last Name")
     @Size(min = 2, message = "Last Name at least 2 characters ")
     @Column(name = "lastName")
     private String lastName;
@@ -81,7 +81,7 @@ public class Employee {
     @Column(name = "notes")
     private String note;
 
-    @NotNull(message = "Nhập email")
+    @NotNull(message = "Input email")
     @Email(message = "Email not valid")
     @Column(name = "email", unique = true)
     private String email;
@@ -95,9 +95,5 @@ public class Employee {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
     private User user;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Role> roles;
 
 }

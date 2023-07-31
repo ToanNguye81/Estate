@@ -8,11 +8,11 @@ import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
+@Setter
+@Table(name = "investor")
 @Entity
-@Table(name = "construction_contractor")
-public class ConstructionContractor {
+public class Investor {
 
     @Id
     @Column(name = "id")
@@ -27,11 +27,18 @@ public class ConstructionContractor {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "phone")
     private String phone;
 
     @Column(name = "phone2")
     private String phone2;
+
+    @Column(name = "email", unique = true)
+    @Email(message = "Email not valid")
+    private String email;
 
     @Column(name = "fax")
     private String fax;
@@ -41,20 +48,5 @@ public class ConstructionContractor {
 
     @Column(name = "note")
     private String note;
-
-    @Column(name = "email", unique = true)
-    @Email(message = "Email not valid")
-    private String email;
-
-    @Column(name = "projects")
-    private String projects;
-
-    @Column(name = "address")
-    private String address;
-
-    public ConstructionContractor() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 }

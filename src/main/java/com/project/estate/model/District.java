@@ -22,23 +22,23 @@ public class District {
     @Column(name = "id", unique = true)
     private int id;
 
-    @NotNull(message = "Nhập district name")
-    @Size(min = 2, message = "Name phải có ít nhất 2 ký tự ")
+    @NotNull(message = "Input district name")
+    @Size(min = 2, message = "Name at least 2 characters ")
     @Column(name = "name")
     private String name;
 
-    @NotNull(message = "Nhập district prefix")
-    @Size(min = 2, message = "Prefix phải có ít nhất 2 ký tự ")
+    @NotNull(message = "Input district prefix")
+    @Size(min = 2, message = "Prefix at least 2 characters ")
     @Column(name = "prefix")
     private String prefix;
 
     @ManyToOne
-    @JoinColumn(name = "province_id")
     @JsonIgnore
+    @JoinColumn(name = "province_id", nullable = false)
     private Province province;
 
-    @OneToMany(mappedBy = "district", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
+    @OneToMany(mappedBy = "district", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Ward> wards;
 
 }
