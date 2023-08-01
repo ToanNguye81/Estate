@@ -74,34 +74,38 @@ public class Project {
     @Column(name = "lng")
     private Double lng;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "province_id")
-    private Province province;
+    // @ManyToOne
+    // @JsonIgnore
+    // @JoinColumn(name = "province_id")
+    // private Province province;
 
-    @ManyToOne
-    @JoinColumn(name = "district_id")
-    @JsonIgnore
-    private District district;
+    // @ManyToOne
+    // @JoinColumn(name = "district_id")
+    // @JsonIgnore
+    // private District district;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "ward_id")
-    private Ward ward;
+    // @ManyToOne
+    // @JsonIgnore
+    // @JoinColumn(name = "ward_id")
+    // private Ward ward;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "street_id")
-    private Street street;
+    // @ManyToOne
+    // @JsonIgnore
+    // @JoinColumn(name = "street_id")
+    // private Street street;
 
-    @ManyToMany
-    @JsonIgnore
-    @JoinTable(name = "project_designUnit", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "designUnit_id"))
-    private List<DesignUnit> designUnits;
+    // @ManyToMany
+    // @JsonIgnore
+    // @JoinTable(name = "project_designUnit", joinColumns = @JoinColumn(name =
+    // "project_id"), inverseJoinColumns = @JoinColumn(name = "designUnit_id"))
+    // private List<DesignUnit> designUnits;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "project_contractor", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "contractor_id"))
-    private List<Contractor> contractors;
+    // @JsonIgnore
+    // @ManyToMany
+    // @JoinTable(name = "project_contractor", joinColumns = @JoinColumn(name =
+    // "project_id"), inverseJoinColumns = @JoinColumn(name = "contractor_id"))
+    // private List<Contractor> contractors;
 
+    // @OneToMany(mappedBy = "project")
+    // private List<RealEstate> realEstates;
 }

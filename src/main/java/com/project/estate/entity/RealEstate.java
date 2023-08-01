@@ -1,11 +1,11 @@
 package com.project.estate.entity;
 
-import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.estate.model.District;
 import com.project.estate.model.Province;
@@ -16,9 +16,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "realEstate")
+@Table(name = "real_estate")
 @Entity
-public class RealEstate {
+public class RealEstate extends BaseEntity {
 
     @Id
     @Column(name = "id")
@@ -26,11 +26,14 @@ public class RealEstate {
     private Long id;
 
     @Column(name = "title")
-    @NotNull(message = "input title")
     private String title;
 
+    @Column(name = "type")
     private Integer type;
+
+    @Column(name = "request")
     private Integer request;
+
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "province_id")
@@ -51,61 +54,156 @@ public class RealEstate {
     @JoinColumn(name = "street_id")
     private Street street;
 
-    private Integer project_id;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
+
+    @JoinColumn(name = "address")
     private String address;
-    private Integer customer_id;
-    private Integer price;
-    private Integer price_min;
-    private Integer price_time;
-    private Integer date_create;
-    private Integer acreage;
-    private Integer direction;
-    private Integer total_floors;
-    private Integer number_floors;
-    private Integer bath;
-    private Integer apart_code;
-    private Integer wall_area;
-    private Integer bedroom;
-    private Integer balcony;
-    private Integer landscape_view;
-    private Integer apart_location;
-    private Integer apart_type;
-    private Integer furniture_type;
-    private Integer price_rent;
-    private Integer return_rate;
-    private Integer legal_doc;
-    private Integer description;
-    private Integer width_y;
-    private Integer long_x;
-    private Integer street_house;
-    private Integer FSBO;
-    private Integer view_num;
-    private Integer create_by;
-    private Integer update_by;
-    private Integer shape;
-    private Integer distance2facade;
-    private Integer adjacent_facade_num;
-    private Integer adjacent_road;
-    private Integer alley_min_width;
-    private Integer adjacent_alley_min_width;
-    private Integer factor;
-    private Integer structure;
-    private Integer DTSXD;
-    private Integer CLCL;
-    private Integer CTXD_price;
-    private Integer CTXD_value;
-    private Integer photo;
-    private Integer lat;
-    private Integer lng;
 
-    @ManyToMany
-    @JsonIgnore
-    @JoinTable(name = "project_designUnit", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "designUnit_id"))
-    private List<DesignUnit> designUnits;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "project_contractor", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "contractor_id"))
-    private List<Contractor> contractors;
+    @Column(name = "price")
+    private Long price;
+
+    @Column(name = "price_min")
+    private Long priceMin;
+
+    @Column(name = "acreage")
+    private Long acreage; // Diện tích
+
+    @Column(name = "direction")
+    private Integer direction; // Hướng nhà (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố định)
+
+    @Column(name = "total_floors")
+    private Integer totalFloors; // Tổng số tầng
+
+    @Column(name = "number_floors")
+    private Integer numberFloors; // Số tầng
+
+    @Column(name = "bath")
+    private Integer bath; // Số phòng tắm
+
+    @Column(name = "apart_code")
+    private String apartCode; // Mã căn hộ
+
+    @Column(name = "wall_area")
+    private Long wallArea; // Diện tích tường
+
+    @Column(name = "bedroom")
+    private Integer bedroom; // Số phòng ngủ
+
+    @Column(name = "balcony")
+    private Integer balcony; // Số ban công
+
+    @Column(name = "landscape_view")
+    private Integer landscapeView; // Loại cảnh quan (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố định)
+
+    @Column(name = "apart_location")
+    private Integer apartLocation; // Vị trí căn hộ (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố định)
+
+    @Column(name = "apart_type")
+    private Integer apartType; // Loại căn hộ (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố định)
+
+    @Column(name = "furniture_type")
+    private Integer furnitureType; // Loại nội thất (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố định)
+
+    @Column(name = "price_rent")
+    private Long priceRent; // Giá thuê
+
+    @Column(name = "return_rate")
+    private Integer returnRate; // Tỷ lệ sinh lời
+
+    @Column(name = "legal_doc")
+    private Integer legalDoc; // Loại giấy tờ pháp lý (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố
+                              // định)
+
+    @Column(name = "description", length = 1000)
+    private String description; // Mô tả (có độ dài tối đa 1000 ký tự)
+
+    @Column(name = "width_y")
+    private Long widthY; // Chiều rộng Y
+
+    @Column(name = "long_x")
+    private Long longX; // Chiều dài X
+
+    @Column(name = "street_house")
+    private Integer streetHouse; // Địa chỉ, tên đường
+
+    @Column(name = "view_num")
+    private Integer viewNum; // Số lượt xem
+
+    @Column(name = "shape")
+    private String shape; // Hình dạng (?)
+
+    @Column(name = "distance2facade")
+    private Long distance2facade; // Khoảng cách đến mặt tiền
+
+    @Column(name = "adjacent_facade_num")
+    private Integer adjacentFacadeNum; // Số mặt tiền kề
+
+    @Column(name = "adjacent_road")
+    private String adjacentRoad; // Mặt đường kề
+
+    @Column(name = "alley_min_width")
+    private Long alleyMinWidth; // Chiều rộng hẻm tối thiểu
+
+    @Column(name = "adjacent_alley_min_width")
+    private Long adjacentAlleyMinWidth; // Chiều rộng hẻm kề tối thiểu
+
+    @Column(name = "factor")
+    private Integer factor; // Faktor (?)
+
+    @Column(name = "structure")
+    private String structure; // Kết cấu (?)
+
+    @Column(name = "DTSXD")
+    private Long dtsxd; // Diện tích sàn xây dựng
+
+    @Column(name = "CLCL")
+    private Long clcl; // Chỉ số CLCL (?)
+
+    @Column(name = "construction_cost")
+    private Long constructionCost; // Chi phí xây dựng
+
+    @Column(name = "construction_value")
+    private Long constructionValue; // Giá trị CTXD (?)
+
+    @Column(name = "photo")
+    private Integer photo; // Số ảnh
+
+    @Column(name = "lat")
+    private Double lat; // Vĩ độ
+
+    @Column(name = "lng")
+    private Double lng; // Kinh độ
+
+    @Column(name = "postedByOwner")
+    private Boolean postedByOwner;
+
+    @Column(name = "price_time")
+    private Integer priceTime; // Thời gian giá
+
+    @Column(name = "date_create")
+    private Long dateCreate; // Ngày tạo
+    // @ManyToMany
+    // @JsonIgnore
+    // @JoinTable(name = "project_designUnit", joinColumns = @JoinColumn(name =
+    // "project_id"), inverseJoinColumns = @JoinColumn(name = "designUnit_id"))
+    // private List<DesignUnit> designUnits;
+
+    // @JsonIgnore
+    // @ManyToMany
+    // @JoinTable(name = "project_contractor", joinColumns = @JoinColumn(name =
+    // "project_id"), inverseJoinColumns = @JoinColumn(name = "contractor_id"))
+    // private List<Contractor> contractors;
+
+    // @Column(name = "create_by")
+    // private Long createdBy; // Người tạo
+
+    // @Column(name = "update_by")
+    // private Long updatedBy; // Người cập nhật
 
 }

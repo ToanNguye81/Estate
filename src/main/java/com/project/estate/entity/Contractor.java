@@ -7,8 +7,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -53,8 +51,8 @@ public class Contractor {
     @Column(name = "address")
     private String address;
 
-    @ManyToMany(mappedBy = "contractor")
-    private List<Project> projects;
+    @Column(name = "projects")
+    private String project;
 
     public Contractor() {
         super();

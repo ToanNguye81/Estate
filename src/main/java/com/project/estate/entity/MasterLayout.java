@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "location")
+@Table(name = "master_layout")
 @Entity
 public class MasterLayout {
 
@@ -22,11 +22,11 @@ public class MasterLayout {
     private Long id;
 
     @Column(name = "name")
-    @NotNull(message = "input nảm")
+    @NotNull(message = "input name")
     private String name;
 
     @Column(name = "description")
-    @NotNull(message = "input nảm")
+    @NotNull(message = "input name")
     private String description;
 
     @ManyToOne
@@ -35,6 +35,6 @@ public class MasterLayout {
     private Project project;
 
     @Column(name = "acreage")
-    @NotNull(message = "input nảm")
+    @NotNull(message = "input name")
     private BigDecimal acreage;
 }

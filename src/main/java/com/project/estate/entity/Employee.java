@@ -8,10 +8,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.math3.stat.descriptive.summary.Product;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,7 +26,7 @@ public class Employee {
 
     @NotNull(message = "input First Name")
     @Size(min = 2, message = "First Name at least 2 characters ")
-    @Column(name = "firstName")
+    @Column(name = "firstNsame")
     private String firstName;
 
     @NotNull(message = "input Last Name")

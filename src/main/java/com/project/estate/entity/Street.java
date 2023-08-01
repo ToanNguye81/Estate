@@ -29,11 +29,12 @@ public class Street {
     @NotNull(message = "input prefix")
     private String prefix;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "province_id")
-    private Province province;
-    @JoinColumn(name = "district_id")
-    private District district;
+    // @ManyToOne
+    // @JsonIgnore
+    // @JoinColumn(name = "province_id")
+    // private Province province;
+
+    // @JoinColumn(name = "district_id")
+    // private District district;
 
 }

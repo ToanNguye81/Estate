@@ -1,27 +1,36 @@
 package com.project.estate.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "location")
+@Table(name = "region_link")
 @Entity
-public class Location {
+public class RegionLink {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "photo")
+    private String photo;
+
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "lat")
-    @NotNull(message = "input lat")
     private Float lat;
 
     @Column(name = "lng")
-    @NotNull(message = "input lng")
     private Float lng;
 }
