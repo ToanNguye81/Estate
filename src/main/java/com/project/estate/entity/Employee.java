@@ -72,9 +72,6 @@ public class Employee {
     @Column(name = "photo")
     private String photo;
 
-    @Column(name = "reportsTo")
-    private String reportsTo;
-
     @Column(name = "notes")
     private String note;
 
@@ -88,6 +85,10 @@ public class Employee {
 
     @Column(name = "profile")
     private String profile;
+
+    @ManyToOne
+    @JoinColumn(name = "reportTo")
+    private Employee reportTo;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"

@@ -1,10 +1,14 @@
 package com.project.estate.entity;
 
 import java.math.BigDecimal;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
@@ -30,9 +34,22 @@ public class MasterLayout {
     private String description;
 
     @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "project_id", nullable = false)
+    @JoinColumn(name = "project_id")
     private Project project;
+
+    @Column(name = "apartment_list")
+    private String apartmentList;
+
+    @Column(name = "photo")
+    private String photo;
+
+    @Column(name = "date_create")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+7")
+    private Date dateCreate;
+
+    @Column(name = "date_update")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+7")
+    private Date dateUpdate;
 
     @Column(name = "acreage")
     @NotNull(message = "input name")

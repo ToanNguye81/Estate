@@ -56,8 +56,8 @@ public class Project {
     @Column(name = "apartmentArea")
     private String apartmentArea;
 
-    @Column(name = "investor")
-    private Integer investor;
+    // @Column(name = "investor")
+    // private Integer investor;
 
     @Column(name = "utilities")
     private String utilities;
@@ -74,25 +74,43 @@ public class Project {
     @Column(name = "lng")
     private Double lng;
 
-    // @ManyToOne
-    // @JsonIgnore
-    // @JoinColumn(name = "province_id")
-    // private Province province;
+    @OneToMany(mappedBy = "project")
+    private List<MasterLayout> masterLayouts;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "province_id")
+    private Province province;
+
+    @ManyToOne
+    @JoinColumn(name = "district_id")
+    @JsonIgnore
+    private District district;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "ward_id")
+    private Ward ward;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "street_id")
+    private Street street;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "investor_id")
+    private Investor investor;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "contractor_id")
+    private Contractor contractor;
 
     // @ManyToOne
-    // @JoinColumn(name = "district_id")
     // @JsonIgnore
-    // private District district;
-
-    // @ManyToOne
-    // @JsonIgnore
-    // @JoinColumn(name = "ward_id")
-    // private Ward ward;
-
-    // @ManyToOne
-    // @JsonIgnore
-    // @JoinColumn(name = "street_id")
-    // private Street street;
+    // @JoinColumn(name = "design_unit_id")
+    // private DesignUnit designUnit;
 
     // @ManyToMany
     // @JsonIgnore

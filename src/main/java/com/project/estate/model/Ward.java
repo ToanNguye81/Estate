@@ -1,10 +1,14 @@
 package com.project.estate.model;
 
+import java.util.Set;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.estate.entity.Project;
 
 @Entity
 @Table(name = "ward")
@@ -29,6 +33,11 @@ public class Ward {
     @JsonBackReference
     @JoinColumn(name = "district_id")
     private District district;
+
+    @OneToMany(targetEntity = Project.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    @JsonIgnore
+    private Set<Project> projects;
 
     public Ward() {
     }

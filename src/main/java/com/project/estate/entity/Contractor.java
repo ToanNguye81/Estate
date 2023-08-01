@@ -48,11 +48,12 @@ public class Contractor {
     @Email(message = "Email not valid")
     private String email;
 
-    @Column(name = "address")
-    private String address;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id") // Tên cột khóa ngoại trong bảng "customer"
+    private Address address;
 
-    @Column(name = "projects")
-    private String project;
+    @OneToMany(mappedBy = "contractor")
+    private List<Project> projects;
 
     public Contractor() {
         super();

@@ -1,5 +1,7 @@
 package com.project.estate.entity;
 
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -30,8 +32,9 @@ public class DesignUnit {
     @Column(name = "projects")
     private String projects;
 
-    @Column(name = "address")
-    private String address;
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id") // Tên cột khóa ngoại trong bảng "design_unit"
+    private Address address;
 
     @Column(name = "phone")
     private String phone;
@@ -51,6 +54,9 @@ public class DesignUnit {
 
     @Column(name = "note")
     private String note;
+
+    // @OneToMany(mappedBy = "design_unit")
+    // private List<Project> projectsList;
 
     public DesignUnit() {
         super();

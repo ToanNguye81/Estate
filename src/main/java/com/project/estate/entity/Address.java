@@ -10,8 +10,8 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "address_map")
-public class AddressMap {
+@Table(name = "address")
+public class Address {
 
     @Id
     @Column(name = "id")
@@ -31,7 +31,16 @@ public class AddressMap {
     @NotNull(message = "input lat")
     private Double lng;
 
-    public AddressMap() {
+    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+    private Contractor contractor;
+
+    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+    private DesignUnit designUnit;
+
+    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+    private Investor investor;
+
+    public Address() {
         super();
         // TODO Auto-generated constructor stub
     }

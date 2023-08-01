@@ -1,5 +1,7 @@
 package com.project.estate.entity;
 
+import java.util.Set;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -28,6 +30,11 @@ public class Street {
     @Column(name = "prefix")
     @NotNull(message = "input prefix")
     private String prefix;
+
+    @OneToMany(targetEntity = Project.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    @JsonIgnore
+    private Set<Project> projects;
 
     // @ManyToOne
     // @JsonIgnore

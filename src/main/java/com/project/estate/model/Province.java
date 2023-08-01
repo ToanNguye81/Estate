@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.project.estate.entity.Project;
 
 @Entity
 @Table(name = "province")
@@ -33,6 +34,11 @@ public class Province {
     // @JsonManagedReference
     @JsonIgnore
     private Set<District> districts;
+
+    @OneToMany(targetEntity = Project.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id")
+    @JsonIgnore
+    private Set<Project> projects;
 
     public Province() {
     }
