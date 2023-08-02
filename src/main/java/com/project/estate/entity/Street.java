@@ -31,17 +31,14 @@ public class Street {
     @NotNull(message = "input prefix")
     private String prefix;
 
-    @OneToMany(targetEntity = Project.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_id")
+    @ManyToOne
     @JsonIgnore
-    private Set<Project> projects;
+    @JoinColumn(name = "province_id")
+    private Province province;
 
-    // @ManyToOne
-    // @JsonIgnore
-    // @JoinColumn(name = "province_id")
-    // private Province province;
-
-    // @JoinColumn(name = "district_id")
-    // private District district;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "district_id")
+    private District district;
 
 }

@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.estate.entity.Project;
+import com.project.estate.entity.Street;
 
 @Entity
 @Table(name = "province")
@@ -30,15 +31,16 @@ public class Province {
 
     // @Column(name = "districts")
     @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
-    /* Có dòng này khi load province sẽ lấy tất cả thông tin quận huyện kèm theo */
-    // @JsonManagedReference
     @JsonIgnore
     private Set<District> districts;
 
-    @OneToMany(targetEntity = Project.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_id")
+    @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Project> projects;
+
+    @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Street> streets;
 
     public Province() {
     }

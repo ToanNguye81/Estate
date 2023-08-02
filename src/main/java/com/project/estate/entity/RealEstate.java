@@ -1,11 +1,7 @@
 package com.project.estate.entity;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.estate.model.District;
 import com.project.estate.model.Province;
@@ -61,10 +57,6 @@ public class RealEstate extends BaseEntity {
     @JoinColumn(name = "address")
     private String address;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
     @Column(name = "price")
     private Long price;
 
@@ -75,7 +67,7 @@ public class RealEstate extends BaseEntity {
     private Long acreage; // Diện tích
 
     @Column(name = "direction")
-    private Integer direction; // Hướng nhà (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố định)
+    private Integer direction; // Hướng nhà
 
     @Column(name = "total_floors")
     private Integer totalFloors; // Tổng số tầng
@@ -99,16 +91,16 @@ public class RealEstate extends BaseEntity {
     private Integer balcony; // Số ban công
 
     @Column(name = "landscape_view")
-    private Integer landscapeView; // Loại cảnh quan (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố định)
+    private Integer landscapeView; // Loại cảnh quan
 
     @Column(name = "apart_location")
-    private Integer apartLocation; // Vị trí căn hộ (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố định)
+    private Integer apartLocation; // Vị trí căn hộ
 
     @Column(name = "apart_type")
-    private Integer apartType; // Loại căn hộ (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố định)
+    private Integer apartType; // Loại căn hộ
 
     @Column(name = "furniture_type")
-    private Integer furnitureType; // Loại nội thất (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố định)
+    private Integer furnitureType; // Loại nội thất
 
     @Column(name = "price_rent")
     private Long priceRent; // Giá thuê
@@ -117,8 +109,7 @@ public class RealEstate extends BaseEntity {
     private Integer returnRate; // Tỷ lệ sinh lời
 
     @Column(name = "legal_doc")
-    private Integer legalDoc; // Loại giấy tờ pháp lý (có thể sử dụng kiểu dữ liệu Enum nếu có các giá trị cố
-                              // định)
+    private Integer legalDoc; // Giấy tờ pháp lý
 
     @Column(name = "description", length = 1000)
     private String description; // Mô tả (có độ dài tối đa 1000 ký tự)
@@ -188,22 +179,9 @@ public class RealEstate extends BaseEntity {
 
     @Column(name = "date_create")
     private Long dateCreate; // Ngày tạo
-    // @ManyToMany
-    // @JsonIgnore
-    // @JoinTable(name = "project_designUnit", joinColumns = @JoinColumn(name =
-    // "project_id"), inverseJoinColumns = @JoinColumn(name = "designUnit_id"))
-    // private List<DesignUnit> designUnits;
 
-    // @JsonIgnore
-    // @ManyToMany
-    // @JoinTable(name = "project_contractor", joinColumns = @JoinColumn(name =
-    // "project_id"), inverseJoinColumns = @JoinColumn(name = "contractor_id"))
-    // private List<Contractor> contractors;
-
-    // @Column(name = "create_by")
-    // private Long createdBy; // Người tạo
-
-    // @Column(name = "update_by")
-    // private Long updatedBy; // Người cập nhật
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
 }

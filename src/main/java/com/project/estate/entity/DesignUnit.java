@@ -29,9 +29,6 @@ public class DesignUnit {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "projects")
-    private String projects;
-
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id") // Tên cột khóa ngoại trong bảng "design_unit"
     private Address address;
@@ -55,8 +52,8 @@ public class DesignUnit {
     @Column(name = "note")
     private String note;
 
-    // @OneToMany(mappedBy = "design_unit")
-    // private List<Project> projectsList;
+    @OneToMany(mappedBy = "designUnit")
+    private List<Project> projects;
 
     public DesignUnit() {
         super();

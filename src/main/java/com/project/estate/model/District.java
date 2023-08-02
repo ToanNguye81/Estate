@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.estate.entity.Project;
+import com.project.estate.entity.Street;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -42,8 +43,11 @@ public class District {
     @OneToMany(mappedBy = "district", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Ward> wards;
 
-    @OneToMany(targetEntity = Project.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_id")
     @JsonIgnore
+    @OneToMany(mappedBy = "district", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Project> projects;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "district", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Street> streets;
 }

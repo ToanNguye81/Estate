@@ -56,9 +56,6 @@ public class Project {
     @Column(name = "apartmentArea")
     private String apartmentArea;
 
-    // @Column(name = "investor")
-    // private Integer investor;
-
     @Column(name = "utilities")
     private String utilities;
 
@@ -107,23 +104,8 @@ public class Project {
     @JoinColumn(name = "contractor_id")
     private Contractor contractor;
 
-    // @ManyToOne
-    // @JsonIgnore
-    // @JoinColumn(name = "design_unit_id")
-    // private DesignUnit designUnit;
-
-    // @ManyToMany
-    // @JsonIgnore
-    // @JoinTable(name = "project_designUnit", joinColumns = @JoinColumn(name =
-    // "project_id"), inverseJoinColumns = @JoinColumn(name = "designUnit_id"))
-    // private List<DesignUnit> designUnits;
-
-    // @JsonIgnore
-    // @ManyToMany
-    // @JoinTable(name = "project_contractor", joinColumns = @JoinColumn(name =
-    // "project_id"), inverseJoinColumns = @JoinColumn(name = "contractor_id"))
-    // private List<Contractor> contractors;
-
-    // @OneToMany(mappedBy = "project")
-    // private List<RealEstate> realEstates;
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "designUnit_id")
+    private DesignUnit designUnit;
 }
