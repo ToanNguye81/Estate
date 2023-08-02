@@ -92,11 +92,11 @@ public class WardController {
                 // get district data
                 District district = districtData.get();
                 // create new ward
-                Ward newDistrict = new Ward();
-                newDistrict.setDistrict(district);
-                newDistrict.setName(pWard.getName());
-                newDistrict.setPrefix(pWard.getPrefix());
-                Ward savedRole = pIWardRepository.save(newDistrict);
+                Ward newWard = new Ward();
+                newWard.setWardName(pWard.getWardName());
+                newWard.setPrefix(pWard.getPrefix());
+                newWard.setDistrict(district);
+                Ward savedRole = pIWardRepository.save(newWard);
                 // return FE
                 return new ResponseEntity<>(savedRole, HttpStatus.CREATED);
             }
@@ -119,8 +119,7 @@ public class WardController {
         if (wardData.isPresent()) {
             // update ward
             Ward newWard = wardData.get();
-            newWard.setName(pWard.getName());
-            newWard.setPrefix(pWard.getPrefix());
+            newWard.setWardName(pWard.getWardName());
             newWard.setPrefix(pWard.getPrefix());
             Ward savedWard = pIWardRepository.save(newWard);
             // return

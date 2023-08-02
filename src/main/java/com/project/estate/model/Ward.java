@@ -10,7 +10,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.estate.entity.Project;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "ward")
 public class Ward {
 
@@ -21,8 +26,8 @@ public class Ward {
 
     @NotNull(message = "Nhập ward name")
     @Size(min = 2, message = "Name phải có ít nhất 2 ký tự ")
-    @Column(name = "name")
-    private String name;
+    @Column(name = "ward_name")
+    private String wardName;
 
     @NotNull(message = "Nhập ward prefix")
     @Size(min = 2, message = "Prefix phải có ít nhất 2 ký tự ")
@@ -38,46 +43,5 @@ public class Ward {
     @JoinColumn(name = "project_id")
     @JsonIgnore
     private Set<Project> projects;
-
-    public Ward() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setDistrict(District district) {
-        this.district = district;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public District getDistrict() {
-        return district;
-    }
-
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return "{" + getId() + "," + getPrefix().toString() + "," + getName().toString() + "}";
-    }
 
 }

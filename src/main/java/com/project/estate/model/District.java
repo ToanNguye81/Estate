@@ -26,8 +26,8 @@ public class District {
 
     @NotNull(message = "Input district name")
     @Size(min = 2, message = "Name at least 2 characters ")
-    @Column(name = "name")
-    private String name;
+    @Column(name = "district_name")
+    private String districtName;
 
     @NotNull(message = "Input district prefix")
     @Size(min = 2, message = "Prefix at least 2 characters ")
@@ -48,6 +48,6 @@ public class District {
     private Set<Project> projects;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "district", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "street", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Street> streets;
 }
