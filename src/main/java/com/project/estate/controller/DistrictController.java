@@ -91,7 +91,7 @@ public class DistrictController {
                 Province province = provinceData.get();
                 District newDistrict = new District();
                 newDistrict.setProvince(province);
-                newDistrict.setDistrictName(pDistrict.getDistrictName());
+                newDistrict.setName(pDistrict.getName());
                 newDistrict.setPrefix(pDistrict.getPrefix());
                 District savedDistrict = pIDistrictRepository.save(newDistrict);
                 return new ResponseEntity<>(savedDistrict, HttpStatus.CREATED);
@@ -113,7 +113,7 @@ public class DistrictController {
         if (districtData.isPresent()) {
             // if existed district
             District newDistrict = districtData.get();
-            newDistrict.setDistrictName(pDistrict.getDistrictName());
+            newDistrict.setName(pDistrict.getName());
             newDistrict.setPrefix(pDistrict.getPrefix());
             newDistrict.setProvince(pDistrict.getProvince());
             District savedDistrict = pIDistrictRepository.save(newDistrict);

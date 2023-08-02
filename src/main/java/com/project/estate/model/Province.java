@@ -10,7 +10,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.estate.entity.Project;
 import com.project.estate.entity.Street;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Setter
+@Getter
 @Table(name = "province")
 public class Province {
 
@@ -41,46 +46,5 @@ public class Province {
     @OneToMany(mappedBy = "province", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Street> streets;
-
-    public Province() {
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setDistricts(Set<District> districts) {
-        this.districts = districts;
-    }
-
-    public Set<District> getDistricts() {
-        return districts;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString() + " " + getDistricts();
-    }
 
 }

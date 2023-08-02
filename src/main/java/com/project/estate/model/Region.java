@@ -17,11 +17,11 @@ public class Region {
     @Column(name = "region_id", unique = true)
     private Integer id;
 
-    @Column(name = "region_code", unique = true)
-    private String regionCode;
+    @Column(name = "code", unique = true)
+    private String code;
 
-    @Column(name = "region_name")
-    private String regionName;
+    @Column(name = "name")
+    private String name;
 
     @ManyToOne // mỗi CRegion thuộc về một CCountry duy nhất.
     @JoinColumn(name = "country_id") // quan hệ giữa CRegion và CCountry là một quan hệ quản lý bỏ trên 1 trong 2

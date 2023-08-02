@@ -6,5 +6,5 @@ import com.project.estate.model.Country;
 
 public interface CountryRepository extends JpaRepository<Country, Long> {
 
-    Country findByCountryCodeContaining(String code);
+    Country findByCodeContaining(String code);
 }

@@ -26,8 +26,8 @@ public class Ward {
 
     @NotNull(message = "Nhập ward name")
     @Size(min = 2, message = "Name phải có ít nhất 2 ký tự ")
-    @Column(name = "ward_name")
-    private String wardName;
+    @Column(name = "name")
+    private String name;
 
     @NotNull(message = "Nhập ward prefix")
     @Size(min = 2, message = "Prefix phải có ít nhất 2 ký tự ")

@@ -40,7 +40,7 @@ public class RegionController {
 
     // Get region by id
     @GetMapping("/regions/{id}")
-    public Region getRegionById(@PathVariable Long id) {
+    public Region getById(@PathVariable Long id) {
         // find region by id
         if (pIRegionRepository.findById(id).isPresent())
             return pIRegionRepository.findById(id).get();
@@ -80,8 +80,8 @@ public class RegionController {
                 Region newRegion = new Region();
                 // get region info
                 newRegion.setCountry(country);
-                newRegion.setRegionName(pRegion.getRegionName());
-                newRegion.setRegionCode(pRegion.getRegionCode());
+                newRegion.setName(pRegion.getName());
+                newRegion.setCode(pRegion.getCode());
                 Region savedRole = pIRegionRepository.save(newRegion);
                 // return success
                 return new ResponseEntity<>(savedRole, HttpStatus.CREATED);
@@ -102,8 +102,8 @@ public class RegionController {
         // update new region
         if (regionData.isPresent()) {
             Region newRegion = regionData.get();
-            newRegion.setRegionName(pRegion.getRegionName());
-            newRegion.setRegionCode(pRegion.getRegionCode());
+            newRegion.setName(pRegion.getName());
+            newRegion.setCode(pRegion.getCode());
             Region savedRegion = pIRegionRepository.save(newRegion);
             return new ResponseEntity<>(savedRegion, HttpStatus.OK);
         } else {
@@ -152,9 +152,9 @@ public class RegionController {
 
     // Return the region containing the specified code
     @GetMapping("/regions/containing-code/{code}")
-    public ResponseEntity<List<Region>> getRegionByContainingCode(@PathVariable String code) {
+    public ResponseEntity<List<Region>> getByContainingCode(@PathVariable String code) {
         List<Region> regionList = new ArrayList<>();
-        Region region = pIRegionRepository.findByRegionCodeContaining(code);
+        Region region = pIRegionRepository.findByCodeContaining(code);
         if (region != null) {
             regionList.add(region);
         }

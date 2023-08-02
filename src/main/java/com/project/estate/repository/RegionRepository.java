@@ -8,7 +8,7 @@ import com.project.estate.model.Region;
 
 public interface RegionRepository extends JpaRepository<Region, Long> {
 
-    Region findByRegionCodeContaining(String code);
+    Region findByCodeContaining(String code);
 
     List<Region> findByCountryId(Long countryId);
 

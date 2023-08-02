@@ -93,7 +93,7 @@ public class WardController {
                 District district = districtData.get();
                 // create new ward
                 Ward newWard = new Ward();
-                newWard.setWardName(pWard.getWardName());
+                newWard.setName(pWard.getName());
                 newWard.setPrefix(pWard.getPrefix());
                 newWard.setDistrict(district);
                 Ward savedRole = pIWardRepository.save(newWard);
@@ -119,7 +119,7 @@ public class WardController {
         if (wardData.isPresent()) {
             // update ward
             Ward newWard = wardData.get();
-            newWard.setWardName(pWard.getWardName());
+            newWard.setName(pWard.getName());
             newWard.setPrefix(pWard.getPrefix());
             Ward savedWard = pIWardRepository.save(newWard);
             // return
