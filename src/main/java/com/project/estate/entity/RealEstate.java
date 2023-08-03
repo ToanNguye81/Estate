@@ -1,5 +1,7 @@
 package com.project.estate.entity;
 
+import java.util.List;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -184,4 +186,6 @@ public class RealEstate extends BaseEntity {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @OneToMany(mappedBy = "real_estate")
+    private List<RealEstate> realEstates;
 }

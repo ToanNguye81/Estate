@@ -43,8 +43,8 @@ public class Customer extends BaseEntity {
     @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
     private User user;
 
-    // @OneToMany(mappedBy = "customer")
-    // private List<RealEstate> realEstates;
+    @OneToMany(mappedBy = "customer")
+    private List<RealEstate> realEstates;
 
     public Customer() {
         super();
