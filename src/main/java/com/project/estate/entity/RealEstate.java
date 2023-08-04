@@ -183,9 +183,7 @@ public class RealEstate extends BaseEntity {
     private Long dateCreate; // Ngày tạo
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "customer_id")
     private Customer customer;
-
-    @OneToMany(mappedBy = "real_estate")
-    private List<RealEstate> realEstates;
 }
