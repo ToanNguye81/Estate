@@ -1,6 +1,5 @@
 package com.project.estate.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,11 +39,14 @@ public class AddressController {
             @RequestParam(value = "size", defaultValue = "10") int size) {
         try {
             // tạo ra một đối tượng Pageable để đại diện cho thông tin về phân trang.
-            // Pageable pageable = PageRequest.of(page, size);
-            List<Address> addressList = new ArrayList<Address>();
-            gAddressRepository.findAll().forEach(addressList::add);
+            Pageable pageable = PageRequest.of(page, size);
+            Page<Address> addressPage = gAddressRepository.findAll(pageable);
+            List<Address> addressList = addressPage.getContent();
+            Long totalElement = addressPage.getTotalElements();
 
-            return new ResponseEntity<>(addressList, HttpStatus.OK);
+            return ResponseEntity.ok()
+                    .header("totalCount", String.valueOf(totalElement))
+                    .body(addressList);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
