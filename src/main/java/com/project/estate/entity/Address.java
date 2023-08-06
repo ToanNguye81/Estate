@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,25 +20,26 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "input address")
     @Size(min = 2, message = "address at least 2 characters ")
+    @NotNull(message = "please input address")
     @Column(name = "address")
     private String address;
 
     @Column(name = "lat")
-    @NotNull(message = "input lat")
     private Double lat;
 
     @Column(name = "lng")
-    @NotNull(message = "input lat")
     private Double lng;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private Contractor contractor;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private DesignUnit designUnit;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private Investor investor;
 

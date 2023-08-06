@@ -1,7 +1,7 @@
 package com.project.estate.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+// import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +18,10 @@ public class Location {
     private Long id;
 
     @Column(name = "lat")
-    @NotNull(message = "input lat")
+    // @NotNull(message = "input lat")
     private Float lat;
 
     @Column(name = "lng")
-    @NotNull(message = "input lng")
+    // @NotNull(message = "input lng")
     private Float lng;
 }

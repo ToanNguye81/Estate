@@ -1,11 +1,10 @@
 package com.project.estate.entity;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+// import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -24,12 +23,12 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "input First Name")
+    // @NotNull(message = "input First Name")
     @Size(min = 2, message = "First Name at least 2 characters ")
     @Column(name = "firstNsame")
     private String firstName;
 
-    @NotNull(message = "input Last Name")
+    // @NotNull(message = "input Last Name")
     @Size(min = 2, message = "Last Name at least 2 characters ")
     @Column(name = "lastName")
     private String lastName;
@@ -75,7 +74,7 @@ public class Employee {
     @Column(name = "notes")
     private String note;
 
-    @NotNull(message = "Input email")
+    // @NotNull(message = "Input email")
     @Email(message = "Email not valid")
     @Column(name = "email", unique = true)
     private String email;

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+// import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.estate.model.District;
@@ -26,7 +26,7 @@ public class Project {
     private Long id;
 
     @Column(name = "name")
-    @NotNull(message = "input name")
+    // @NotNull(message = "input name")
     private String name;
 
     @Column(name = "address")

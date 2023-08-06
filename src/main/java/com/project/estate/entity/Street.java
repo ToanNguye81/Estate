@@ -1,9 +1,7 @@
 package com.project.estate.entity;
 
-import java.util.Set;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+// import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.estate.model.District;
@@ -24,11 +22,11 @@ public class Street {
     private Long id;
 
     @Column(name = "name")
-    @NotNull(message = "input name")
+    // @NotNull(message = "input name")
     private String name;
 
     @Column(name = "prefix")
-    @NotNull(message = "input prefix")
+    // @NotNull(message = "input prefix")
     private String prefix;
 
     @ManyToOne

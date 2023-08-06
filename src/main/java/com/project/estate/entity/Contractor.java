@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+// import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -21,7 +21,7 @@ public class Contractor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "input name")
+    // @NotNull(message = "input name")
     @Size(min = 2, message = "name at least 2 characters ")
     @Column(name = "name")
     private String name;

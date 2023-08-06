@@ -3,7 +3,7 @@ package com.project.estate.model;
 import java.util.Set;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+// import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,12 +24,12 @@ public class District {
     @Column(name = "id", unique = true)
     private int id;
 
-    @NotNull(message = "Input district name")
+    // @NotNull(message = "Input district name")
     @Size(min = 2, message = "Name at least 2 characters ")
     @Column(name = "name")
     private String name;
 
-    @NotNull(message = "Input district prefix")
+    // @NotNull(message = "Input district prefix")
     @Size(min = 2, message = "Prefix at least 2 characters ")
     @Column(name = "prefix")
     private String prefix;

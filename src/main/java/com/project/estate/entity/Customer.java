@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+// import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Getter;
@@ -16,12 +16,12 @@ import lombok.Setter;
 @Table(name = "customer")
 public class Customer extends BaseEntity {
 
-    @NotNull(message = "Input contact name")
+    // @NotNull(message = "Input contact name")
     @Size(min = 2, message = "contact name at least 2 characters ")
     @Column(name = "contact_name")
     private String contactName;
 
-    @NotNull(message = "Input Contact title")
+    // @NotNull(message = "Input Contact title")
     @Size(min = 2, message = "Contact title at least 2 characters ")
     @Column(name = "contact_title")
     private String contactTitle;

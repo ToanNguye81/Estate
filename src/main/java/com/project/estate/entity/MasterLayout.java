@@ -2,14 +2,11 @@ package com.project.estate.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+// import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -26,11 +23,11 @@ public class MasterLayout {
     private Long id;
 
     @Column(name = "name")
-    @NotNull(message = "input name")
+    // @NotNull(message = "input name")
     private String name;
 
     @Column(name = "description")
-    @NotNull(message = "input name")
+    // @NotNull(message = "input name")
     private String description;
 
     @ManyToOne
@@ -52,6 +49,6 @@ public class MasterLayout {
     private Date dateUpdate;
 
     @Column(name = "acreage")
-    @NotNull(message = "input name")
+    // @NotNull(message = "input name")
     private BigDecimal acreage;
 }
