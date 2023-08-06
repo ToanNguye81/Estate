@@ -1,5 +1,6 @@
 package com.project.estate.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,110 +24,134 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.estate.entity.Address;
+import com.project.estate.entity.Contractor;
 import com.project.estate.repository.AddressRepository;
+import com.project.estate.repository.ContractorRepository;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/")
-public class AddressController {
+public class ContractorController {
+    @Autowired
+    ContractorRepository gContractorRepository;
     @Autowired
     AddressRepository gAddressRepository;
 
-    // get all Address
-    @GetMapping("/address")
-    public ResponseEntity<List<Address>> getAllAddress(
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "10") int size) {
+    // get all Contractor
+    @GetMapping("/contractor")
+    public ResponseEntity<List<Contractor>> getAllContractor() {
         try {
             // tạo ra một đối tượng Pageable để đại diện cho thông tin về phân trang.
-            Pageable pageable = PageRequest.of(page, size);
-            Page<Address> addressPage = gAddressRepository.findAll(pageable);
-            List<Address> addressList = addressPage.getContent();
-            Long totalElement = addressPage.getTotalElements();
+            List<Contractor> contractorList = new ArrayList<Contractor>();
+            gContractorRepository.findAll().forEach(contractorList::add);
 
-            return ResponseEntity.ok()
-                    .header("totalCount", String.valueOf(totalElement))
-                    .body(addressList);
+            return new ResponseEntity<>(contractorList, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    // create new address
-    @PostMapping("/address")
-    public ResponseEntity<Object> createNewAddress(
-            @Valid @RequestBody Address pAddress) {
+    // create new contractor
+    @PostMapping("/contractor")
+    public ResponseEntity<Object> createNewContractor(
+            @Valid @RequestBody Contractor pContractor,
+            @RequestParam(value = "addressId") Long addressId) {
         try {
-            Address vAddress = new Address();
-            vAddress.setAddress(pAddress.getAddress());
-            vAddress.setLat(pAddress.getLat());
-            vAddress.setLng(pAddress.getLng());
-            Address vAddressSave = gAddressRepository.save(vAddress);
-            return new ResponseEntity<>(vAddressSave, HttpStatus.CREATED);
+            Optional<Address> addressData = gAddressRepository.findById(addressId);
+            if (addressData.isPresent()) {
+                Contractor vContractor = new Contractor();
+                vContractor.setAddress(addressData.get());
+                vContractor.setDescription(pContractor.getDescription());
+                vContractor.setEmail(pContractor.getEmail());
+                vContractor.setFax(pContractor.getFax());
+                vContractor.setName(pContractor.getName());
+                vContractor.setNote(pContractor.getNote());
+                vContractor.setPhone(pContractor.getPhone());
+                vContractor.setPhone2(pContractor.getPhone2());
+                vContractor.setWebsite(pContractor.getWebsite());
+                Contractor vContractorSave = gContractorRepository.save(vContractor);
+                return new ResponseEntity<>(vContractorSave, HttpStatus.CREATED);
+            } else {
+                return new ResponseEntity<>("Not found Address", HttpStatus.NOT_FOUND);
+            }
+
         } catch (Exception e) {
             return ResponseEntity.unprocessableEntity()
-                    .body("Failed to Create specified Address: " + e.getCause().getCause().getMessage());
+                    .body("Failed to Create specified Contractor: " + e.getCause().getCause().getMessage());
         }
 
     }
 
-    // get address by id
-    @GetMapping("/address/{addressId}")
-    public ResponseEntity<Object> getAddressById(
-            @PathVariable Long addressId) {
-        Optional<Address> vAddressData = gAddressRepository.findById(addressId);
-        if (vAddressData.isPresent()) {
+    // get contractor by id
+    @GetMapping("/contractor/{contractorId}")
+    public ResponseEntity<Object> getContractorById(
+            @PathVariable Long contractorId) {
+        Optional<Contractor> vContractorData = gContractorRepository.findById(contractorId);
+        if (vContractorData.isPresent()) {
             try {
-                Address vAddress = vAddressData.get();
-                return new ResponseEntity<>(vAddress, HttpStatus.OK);
+                Contractor vContractor = vContractorData.get();
+                return new ResponseEntity<>(vContractor, HttpStatus.OK);
             } catch (Exception e) {
                 return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
-            Address vAddressNull = new Address();
-            return new ResponseEntity<>(vAddressNull, HttpStatus.NOT_FOUND);
+            Contractor vContractorNull = new Contractor();
+            return new ResponseEntity<>(vContractorNull, HttpStatus.NOT_FOUND);
         }
     }
 
-    // Update address by id
-    @PutMapping("/address/{addressId}")
-    public ResponseEntity<Object> updateAddress(
-            @PathVariable Long addressId,
-            @Valid @RequestBody Address pAddress) {
-        Optional<Address> vAddressData = gAddressRepository.findById(addressId);
-        if (vAddressData.isPresent()) {
+    // Update contractor by id
+    @PutMapping("/contractor/{contractorId}")
+    public ResponseEntity<Object> updateContractor(
+            @PathVariable Long contractorId,
+            @Valid @RequestBody Contractor pContractor,
+            @RequestParam(value = "addressId") Long addressId) {
+        Optional<Contractor> vContractorData = gContractorRepository.findById(contractorId);
+        if (vContractorData.isPresent()) {
             try {
-                Address vAddress = vAddressData.get();
-                vAddress.setAddress(pAddress.getAddress());
-                vAddress.setLat(pAddress.getLat());
-                vAddress.setLng(pAddress.getLng());
-                Address vAddressSave = gAddressRepository.save(vAddress);
-                return new ResponseEntity<>(vAddressSave, HttpStatus.OK);
+                Optional<Address> addressData = gAddressRepository.findById(addressId);
+                if (addressData.isPresent()) {
+                    Contractor vContractor = new Contractor();
+                    vContractor.setAddress(addressData.get());
+                    vContractor.setDescription(pContractor.getDescription());
+                    vContractor.setEmail(pContractor.getEmail());
+                    vContractor.setFax(pContractor.getFax());
+                    vContractor.setName(pContractor.getName());
+                    vContractor.setNote(pContractor.getNote());
+                    vContractor.setPhone(pContractor.getPhone());
+                    vContractor.setPhone2(pContractor.getPhone2());
+                    vContractor.setWebsite(pContractor.getWebsite());
+                    Contractor vContractorSave = gContractorRepository.save(vContractor);
+                    return new ResponseEntity<>(vContractorSave, HttpStatus.CREATED);
+                } else {
+                    return new ResponseEntity<>("Not found Address", HttpStatus.NOT_FOUND);
+                }
+
             } catch (Exception e) {
                 return ResponseEntity.unprocessableEntity()
-                        .body("Failed to Update specified Address: " + e.getCause().getCause().getMessage());
+                        .body("Failed to Update specified Contractor: " + e.getCause().getCause().getMessage());
             }
         } else {
-            Address vAddressNull = new Address();
-            return new ResponseEntity<>(vAddressNull, HttpStatus.NOT_FOUND);
+            Contractor vContractorNull = new Contractor();
+            return new ResponseEntity<>(vContractorNull, HttpStatus.NOT_FOUND);
         }
     }
 
-    // Delete address by id
-    @DeleteMapping("/address/{addressId}")
-    private ResponseEntity<Object> deleteAddressById(
-            @PathVariable Long addressId) {
-        Optional<Address> vAddressData = gAddressRepository.findById(addressId);
-        if (vAddressData.isPresent()) {
+    // Delete contractor by id
+    @DeleteMapping("/contractor/{contractorId}")
+    private ResponseEntity<Object> deleteContractorById(
+            @PathVariable Long contractorId) {
+        Optional<Contractor> vContractorData = gContractorRepository.findById(contractorId);
+        if (vContractorData.isPresent()) {
             try {
-                gAddressRepository.deleteById(addressId);
+                gContractorRepository.deleteById(contractorId);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } catch (Exception e) {
                 return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } else {
-            Address vAddressNull = new Address();
-            return new ResponseEntity<>(vAddressNull, HttpStatus.NOT_FOUND);
+            Contractor vContractorNull = new Contractor();
+            return new ResponseEntity<>(vContractorNull, HttpStatus.NOT_FOUND);
         }
     }
 

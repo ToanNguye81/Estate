@@ -7,6 +7,8 @@ import javax.validation.constraints.Email;
 // import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -49,6 +51,7 @@ public class Contractor {
     private String email;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "address_id") // Tên cột khóa ngoại trong bảng "customer"
     private Address address;
 
