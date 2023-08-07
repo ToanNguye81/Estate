@@ -50,8 +50,7 @@ public class Contractor {
     @Email(message = "Email not valid")
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id") // Tên cột khóa ngoại trong bảng "customer"
     private Address address;
 

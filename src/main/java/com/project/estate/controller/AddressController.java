@@ -58,7 +58,6 @@ public class AddressController {
             return ResponseEntity.unprocessableEntity()
                     .body("Failed to Create specified Address: " + e.getCause().getCause().getMessage());
         }
-
     }
 
     // get address by id
