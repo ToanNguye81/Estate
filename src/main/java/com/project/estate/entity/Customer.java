@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "customer")
-public class Customer extends BaseEntity {
+public class Customer extends User {
 
     // @NotNull(message = "Input contact name")
     @Size(min = 2, message = "contact name at least 2 characters ")
@@ -39,9 +39,9 @@ public class Customer extends BaseEntity {
     @Column(name = "note")
     private String note;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
-    private User user;
+    // @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
+    // private User user;
 
     @OneToMany(mappedBy = "customer")
     private List<RealEstate> realEstates;
