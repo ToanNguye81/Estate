@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "employee")
 @Entity
-public class Employee {
+public class Employee extends User {
 
     @Id
     @Column(name = "id")
@@ -89,8 +89,8 @@ public class Employee {
     @JoinColumn(name = "reportTo")
     private Employee reportTo;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
-    private User user;
+    // @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    // @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
+    // private User user;
 
 }

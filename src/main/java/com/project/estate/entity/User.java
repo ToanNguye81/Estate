@@ -24,11 +24,11 @@ public class User extends BaseEntity {
 			@JoinColumn(name = "role_id") })
 	private Set<Role> roles = new HashSet<>();
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	private Employee employee;
+	// @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	// private Employee employee;
 
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	private Customer customer;
+	// @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+	// private Customer customer;
 
 	/**
 	 * @return the username
