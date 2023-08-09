@@ -8,15 +8,16 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Table(name = "employee")
 @Entity
-public class Employee extends User {
+@Table(name = "employee")
+public class Employee {
 
     @Id
     @Column(name = "id")
@@ -25,7 +26,7 @@ public class Employee extends User {
 
     // @NotNull(message = "input First Name")
     @Size(min = 2, message = "First Name at least 2 characters ")
-    @Column(name = "firstNsame")
+    @Column(name = "firstName")
     private String firstName;
 
     // @NotNull(message = "input Last Name")
@@ -89,8 +90,9 @@ public class Employee extends User {
     @JoinColumn(name = "reportTo")
     private Employee reportTo;
 
-    // @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    // @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
-    // private User user;
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
+    private User user;
 
 }

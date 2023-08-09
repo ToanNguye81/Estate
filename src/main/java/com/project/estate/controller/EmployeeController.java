@@ -54,14 +54,10 @@ public class EmployeeController {
             vEmployee.setBirthDate(pEmployee.getBirthDate());
             vEmployee.setCity(pEmployee.getCity());
             vEmployee.setCountry(pEmployee.getCountry());
-            vEmployee.setCreatedAt(pEmployee.getCreatedAt());
-            vEmployee.setCreatedBy(pEmployee.getCreatedBy());
-            vEmployee.setDeleted(false);
             vEmployee.setEmail(pEmployee.getEmail());
             vEmployee.setExtension(pEmployee.getExtension());
             vEmployee.setFirstName(pEmployee.getFirstName());
             vEmployee.setHireDate(pEmployee.getHireDate());
-
             Employee vEmployeeSave = gEmployeeRepository.save(vEmployee);
             return new ResponseEntity<>(vEmployeeSave, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -102,9 +98,6 @@ public class EmployeeController {
                 vEmployee.setBirthDate(pEmployee.getBirthDate());
                 vEmployee.setCity(pEmployee.getCity());
                 vEmployee.setCountry(pEmployee.getCountry());
-                vEmployee.setCreatedAt(pEmployee.getCreatedAt());
-                vEmployee.setCreatedBy(pEmployee.getCreatedBy());
-                vEmployee.setDeleted(false);
                 vEmployee.setEmail(pEmployee.getEmail());
                 vEmployee.setExtension(pEmployee.getExtension());
                 vEmployee.setFirstName(pEmployee.getFirstName());
