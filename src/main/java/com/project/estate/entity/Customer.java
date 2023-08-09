@@ -7,6 +7,8 @@ import javax.validation.constraints.Email;
 // import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +16,11 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "customer")
-public class Customer extends User {
+public class Customer {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     // @NotNull(message = "Input contact name")
     @Size(min = 2, message = "contact name at least 2 characters ")
@@ -39,9 +45,10 @@ public class Customer extends User {
     @Column(name = "note")
     private String note;
 
-    // @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    // @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
-    // private User user;
+    @OneToOne
+    @JsonIgnore
+    @JoinColumn(name = "user_id") // Tên cột khóa ngoại trong bảng "customer"
+    private User user;
 
     @OneToMany(mappedBy = "customer")
     private List<RealEstate> realEstates;

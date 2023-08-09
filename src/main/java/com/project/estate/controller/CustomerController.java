@@ -52,16 +52,10 @@ public class CustomerController {
             vCustomer.setAddress(pCustomer.getAddress());
             vCustomer.setContactName(pCustomer.getContactName());
             vCustomer.setContactTitle(pCustomer.getContactTitle());
-            vCustomer.setCreatedAt(pCustomer.getCreatedAt());
-            vCustomer.setCreatedBy(pCustomer.getCreatedBy());
             vCustomer.setEmail(pCustomer.getEmail());
             vCustomer.setMobile(pCustomer.getMobile());
             vCustomer.setNote(pCustomer.getNote());
             vCustomer.setRealEstates(pCustomer.getRealEstates());
-            vCustomer.setUpdatedAt(pCustomer.getUpdatedAt());
-            vCustomer.setDeleted(false);
-            vCustomer.setUsername(null);
-
             Customer vCustomerSave = gCustomerRepository.save(vCustomer);
             return new ResponseEntity<>(vCustomerSave, HttpStatus.CREATED);
         } catch (Exception e) {
