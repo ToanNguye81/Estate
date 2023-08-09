@@ -82,7 +82,6 @@ public class ContractorController {
             newAddress.setAddress(pAddress.getAddress());
             newAddress.setLat(pAddress.getLat());
             newAddress.setLng(pAddress.getLng());
-
             Address savedAddress = gAddressRepository.save(newAddress);
 
             // Tạo mới Contractor và liên kết với Address

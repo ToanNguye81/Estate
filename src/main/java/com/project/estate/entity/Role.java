@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,6 +20,7 @@ public class Role extends BaseEntity {
 
 	private String roleKey;
 
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name = "role_permission", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "permission_id") })

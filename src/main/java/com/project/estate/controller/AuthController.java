@@ -32,7 +32,6 @@ public class AuthController {
     @PostMapping("/register")
     public User register(@RequestBody User user) {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-
         return userService.createUser(user);
     }
 

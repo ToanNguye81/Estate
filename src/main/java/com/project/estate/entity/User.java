@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,16 +22,19 @@ public class User extends BaseEntity {
 	@Column(name = "password")
 	private String password;
 
+	@JsonIgnore
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Employee employee;
+
+	@JsonIgnore
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Customer customer;
+
+	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "role_id") })
 	private Set<Role> roles = new HashSet<>();
-
-	// @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	// private Employee employee;
-
-	// @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-	// private Customer customer;
 
 	/**
 	 * @return the username
