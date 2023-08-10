@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.project.estate.entity.User;
+
 import java.util.Collection;
 
 @Getter
@@ -89,4 +91,5 @@ public class UserPrincipal implements UserDetails {
 	public void setAuthorities(Collection authorities) {
 		this.authorities = authorities;
 	}
+
 }

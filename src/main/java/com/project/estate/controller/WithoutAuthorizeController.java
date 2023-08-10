@@ -17,7 +17,7 @@ import com.project.estate.repository.UserRepository;
 import com.project.estate.service.UserService;
 
 /**
- * @author hieuha
+ * @author
  *
  */
 @RestController
@@ -36,7 +36,7 @@ public class WithoutAuthorizeController {
     }
 
     /**
-     * Test trường hợp khôngcheck quyền Authorize
+     * Test trường hợp không check quyền Authorize
      * Tạo mới user
      * 
      * @param user

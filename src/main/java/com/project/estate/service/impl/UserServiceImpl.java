@@ -11,6 +11,8 @@ import com.project.estate.service.UserService;
 import java.util.HashSet;
 import java.util.Set;
 
+/* cung cấp các phương thức để tương tác với thông tin người dùng trong cơ sở dữ liệu,
+ bao gồm cả việc tạo người dùng mới và truy vấn thông tin người dùng dựa trên tên người dùng. */
 @Service
 public class UserServiceImpl implements UserService {
 

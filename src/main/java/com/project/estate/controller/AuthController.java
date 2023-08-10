@@ -52,11 +52,6 @@ public class AuthController {
 
     @GetMapping("/hello")
     @PreAuthorize("hasAnyAuthority('USER_CREATE', 'USER_UPDATE')")
-    /*
-     * @PreAuthorize("hasRole('USER_READ') " + "|| hasRole('USER_CREATE')" +
-     * "|| hasRole('USER_UPDATE')" + "|| (hasRole('USER_DELETE')")
-     */
-
     public ResponseEntity hello() {
         return ResponseEntity.ok("hello  have USER_READ OR USER_CREATE OR USER_UPDATE oR USER_DELETE");
     }
