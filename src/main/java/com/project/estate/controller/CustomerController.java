@@ -26,15 +26,15 @@ import com.project.estate.entity.User;
 import com.project.estate.repository.CustomerRepository;
 import com.project.estate.repository.UserRepository;
 import com.project.estate.security.UserPrincipal;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/")
 public class CustomerController {
     @Autowired
-    CustomerRepository gCustomerRepository;
-    UserRepository gUserRepository;
+    CustomerRepository customerRepository;
+    @Autowired
+    private UserRepository userRepository;
 
     // get all Customer
     @GetMapping("/customer")
@@ -42,18 +42,12 @@ public class CustomerController {
         try {
             // tạo ra một đối tượng Pageable để đại diện cho thông tin về phân trang.
             List<Customer> customerList = new ArrayList<Customer>();
-            gCustomerRepository.findAll().forEach(customerList::add);
+            customerRepository.findAll().forEach(customerList::add);
 
             return new ResponseEntity<>(customerList, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
-
-    @GetMapping(value = "customer/user/{userId}")
-    public ResponseEntity<Object> getMethodName(@PathVariable Long userId) {
-        Customer customer = gCustomerRepository.findByUserId(userId);
-        return new ResponseEntity<Object>(customer, HttpStatus.OK);
     }
 
     // create new customer
@@ -62,30 +56,15 @@ public class CustomerController {
             @Valid @RequestBody Customer pCustomer,
             @AuthenticationPrincipal UserPrincipal currentUser) {
         try {
-            System.out.println("====================================");
-            System.out.println(currentUser.getUserId());
-            System.out.println(currentUser.getUsername());
-            System.out.println("====================================");
             // Kiểm tra xem bản ghi khách hàng đã tồn tại với ID người dùng này chưa
-            Customer existingCustomer = gCustomerRepository.findByUserId(currentUser.getUserId());
-
-            System.out.println((existingCustomer));
-            System.out.println("==================++++++===========");
-
+            Customer existingCustomer = customerRepository.findByUserId(currentUser.getUserId());
             if (existingCustomer != null) {
-                System.out.println("+++++++++++++++++++++++++++++");
-                System.out.println(existingCustomer);
-                System.out.println("+++++++++++++++++++++++++++++");
                 return ResponseEntity.badRequest()
                         .body("A customer record already exists for this user.");
             }
 
             // Lấy thông tin người dùng từ bảng User
-            System.out.println(currentUser.getUsername());// username=123455
-            User user = gUserRepository.findByUsername(currentUser.getUsername());
-            System.out.println("---------------------------");
-            System.out.println(user);
-            System.out.println("---------------------------");
+            User user = userRepository.findByUsername(currentUser.getUsername());
             // Tạo customer
             Customer vCustomer = new Customer();
             vCustomer.setAddress(pCustomer.getAddress());
@@ -95,8 +74,8 @@ public class CustomerController {
             vCustomer.setMobile(pCustomer.getMobile());
             vCustomer.setNote(pCustomer.getNote());
             vCustomer.setRealEstates(pCustomer.getRealEstates());
-            Customer vCustomerSave = gCustomerRepository.save(vCustomer);
             vCustomer.setUser(user); // Gán thông tin người dùng vào bản
+            Customer vCustomerSave = customerRepository.save(vCustomer);
             // ghi khách hàng
 
             return new ResponseEntity<>(vCustomerSave, HttpStatus.CREATED);
@@ -110,7 +89,7 @@ public class CustomerController {
     @GetMapping("/customer/{customerId}")
     public ResponseEntity<Object> getCustomerById(
             @PathVariable Long customerId) {
-        Optional<Customer> vCustomerData = gCustomerRepository.findById(customerId);
+        Optional<Customer> vCustomerData = customerRepository.findById(customerId);
         if (vCustomerData.isPresent()) {
             try {
                 Customer vCustomer = vCustomerData.get();
@@ -129,12 +108,12 @@ public class CustomerController {
     public ResponseEntity<Object> updateCustomer(
             @PathVariable Long customerId,
             @Valid @RequestBody Customer pCustomer) {
-        Optional<Customer> vCustomerData = gCustomerRepository.findById(customerId);
+        Optional<Customer> vCustomerData = customerRepository.findById(customerId);
         if (vCustomerData.isPresent()) {
             try {
                 Customer vCustomer = vCustomerData.get();
 
-                Customer vCustomerSave = gCustomerRepository.save(vCustomer);
+                Customer vCustomerSave = customerRepository.save(vCustomer);
                 return new ResponseEntity<>(vCustomerSave, HttpStatus.OK);
             } catch (Exception e) {
                 return ResponseEntity.unprocessableEntity()
@@ -150,10 +129,10 @@ public class CustomerController {
     @DeleteMapping("/customer/{customerId}")
     private ResponseEntity<Object> deleteCustomerById(
             @PathVariable Long customerId) {
-        Optional<Customer> vCustomerData = gCustomerRepository.findById(customerId);
+        Optional<Customer> vCustomerData = customerRepository.findById(customerId);
         if (vCustomerData.isPresent()) {
             try {
-                gCustomerRepository.deleteById(customerId);
+                customerRepository.deleteById(customerId);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } catch (Exception e) {
                 return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

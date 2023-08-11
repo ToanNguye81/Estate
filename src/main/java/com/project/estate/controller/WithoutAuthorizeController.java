@@ -30,7 +30,7 @@ public class WithoutAuthorizeController {
      * 
      * @return
      */
-    @GetMapping("/users")
+    @GetMapping("luli/users")
     public ResponseEntity<List<Object>> getUsers() {
         return new ResponseEntity(userRepository.findAll(), HttpStatus.OK);
     }
