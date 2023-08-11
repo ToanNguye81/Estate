@@ -6,4 +6,6 @@ import com.project.estate.entity.Employee;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
+    Employee findByUserId(Long userId);
+
 }
