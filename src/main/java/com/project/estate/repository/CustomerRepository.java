@@ -7,5 +7,4 @@ import com.project.estate.entity.Customer;
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     Customer findByUserId(Long userId);
-
 }
