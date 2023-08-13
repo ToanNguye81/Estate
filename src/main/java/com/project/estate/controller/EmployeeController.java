@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.estate.entity.Employee;
-import com.project.estate.entity.Employee;
 import com.project.estate.entity.User;
 import com.project.estate.repository.EmployeeRepository;
 import com.project.estate.repository.UserRepository;
