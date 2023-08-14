@@ -35,24 +35,24 @@ public class MasterLayoutController {
     AddressRepository gAddressRepository;
 
     // get all MasterLayout
-    @GetMapping("/contractor")
+    @GetMapping("/masterLayout")
     public ResponseEntity<List<MasterLayout>> getAllMasterLayout() {
         try {
             // tạo ra một đối tượng Pageable để đại diện cho thông tin về phân trang.
-            List<MasterLayout> contractorList = new ArrayList<MasterLayout>();
-            gMasterLayoutRepository.findAll().forEach(contractorList::add);
+            List<MasterLayout> masterLayoutList = new ArrayList<MasterLayout>();
+            gMasterLayoutRepository.findAll().forEach(masterLayoutList::add);
 
-            return new ResponseEntity<>(contractorList, HttpStatus.OK);
+            return new ResponseEntity<>(masterLayoutList, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    // get contractor by id
-    @GetMapping("/contractor/{contractorId}")
+    // get masterLayout by id
+    @GetMapping("/masterLayout/{masterLayoutId}")
     public ResponseEntity<Object> getMasterLayoutById(
-            @PathVariable Long contractorId) {
-        Optional<MasterLayout> vMasterLayoutData = gMasterLayoutRepository.findById(contractorId);
+            @PathVariable Long masterLayoutId) {
+        Optional<MasterLayout> vMasterLayoutData = gMasterLayoutRepository.findById(masterLayoutId);
         if (vMasterLayoutData.isPresent()) {
             try {
                 MasterLayout vMasterLayout = vMasterLayoutData.get();
@@ -66,8 +66,8 @@ public class MasterLayoutController {
         }
     }
 
-    // create new contractor
-    @PostMapping("/contractor")
+    // create new masterLayout
+    @PostMapping("/masterLayout")
     @Transactional
     public ResponseEntity<Object> createNewMasterLayout(@Valid @RequestBody MasterLayout pMasterLayout) {
         try {
@@ -98,12 +98,12 @@ public class MasterLayoutController {
         }
     }
 
-    @PutMapping("/contractor/{contractorId}")
+    @PutMapping("/masterLayout/{masterLayoutId}")
     @Transactional
     public ResponseEntity<Object> updateMasterLayout(
-            @PathVariable Long contractorId,
+            @PathVariable Long masterLayoutId,
             @Valid @RequestBody MasterLayout pMasterLayout) {
-        Optional<MasterLayout> vMasterLayoutData = gMasterLayoutRepository.findById(contractorId);
+        Optional<MasterLayout> vMasterLayoutData = gMasterLayoutRepository.findById(masterLayoutId);
         if (vMasterLayoutData.isPresent()) {
             try {
                 MasterLayout existingMasterLayout = vMasterLayoutData.get();
@@ -149,14 +149,14 @@ public class MasterLayoutController {
         }
     }
 
-    // Delete contractor by id
-    @DeleteMapping("/contractor/{contractorId}")
+    // Delete masterLayout by id
+    @DeleteMapping("/masterLayout/{masterLayoutId}")
     private ResponseEntity<Object> deleteMasterLayoutById(
-            @PathVariable Long contractorId) {
-        Optional<MasterLayout> vMasterLayoutData = gMasterLayoutRepository.findById(contractorId);
+            @PathVariable Long masterLayoutId) {
+        Optional<MasterLayout> vMasterLayoutData = gMasterLayoutRepository.findById(masterLayoutId);
         if (vMasterLayoutData.isPresent()) {
             try {
-                gMasterLayoutRepository.deleteById(contractorId);
+                gMasterLayoutRepository.deleteById(masterLayoutId);
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             } catch (Exception e) {
                 return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
