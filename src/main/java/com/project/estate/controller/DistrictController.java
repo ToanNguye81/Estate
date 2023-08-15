@@ -38,7 +38,7 @@ public class DistrictController {
     ProvinceRepository pIProvinceRepository;
 
     // get all district
-    @GetMapping(value = "/district/all")
+    @GetMapping(value = "/district")
     public ResponseEntity<List<District>> getAllDistrict(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size) {
@@ -57,7 +57,7 @@ public class DistrictController {
     }
 
     // get district by id
-    @GetMapping(value = "/district/details/{id}")
+    @GetMapping(value = "/district/{id}")
     public District getDistrictById(@PathVariable Long id) {
         if (pIDistrictRepository.findById(id).isPresent()) {
             return pIDistrictRepository.findById(id).get();
@@ -80,7 +80,7 @@ public class DistrictController {
     }
 
     // create new district
-    @PostMapping(value = "/district/create/{provinceId}")
+    @PostMapping(value = "/district/{provinceId}")
     public ResponseEntity<Object> createDistrict(@PathVariable Long provinceId,
             @RequestBody District pDistrict) {
         try {
@@ -106,7 +106,7 @@ public class DistrictController {
     }
 
     // update district
-    @PutMapping(value = "/district/update/{id}")
+    @PutMapping(value = "/district/{id}")
     public ResponseEntity<Object> updateDistrictById(@PathVariable Long id, @RequestBody District pDistrict) {
         // find district by id
         Optional<District> districtData = pIDistrictRepository.findById(id);
@@ -125,7 +125,7 @@ public class DistrictController {
     }
 
     // delete District by id
-    @DeleteMapping("/district/delete/{id}")
+    @DeleteMapping("/district/{id}")
     public ResponseEntity<Object> deleteDistrictById(@PathVariable Long id) {
         try {
             pIDistrictRepository.deleteById(id);

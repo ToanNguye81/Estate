@@ -34,7 +34,7 @@ public class ProvinceController {
     ProvinceRepository pIProvinceRepository;
 
     // get all province
-    @GetMapping(value = "/province/all")
+    @GetMapping(value = "/province")
     public ResponseEntity<List<Province>> getAllProvince(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size) {
@@ -53,7 +53,7 @@ public class ProvinceController {
     }
 
     // get province by id
-    @GetMapping(value = "/province/details/{id}")
+    @GetMapping(value = "/province/{id}")
     public Province getProvinceById(@PathVariable Long id) {
         if (pIProvinceRepository.findById(id).isPresent()) {
             return pIProvinceRepository.findById(id).get();
@@ -63,7 +63,7 @@ public class ProvinceController {
     }
 
     // create new province
-    @PostMapping(value = "/province/create")
+    @PostMapping(value = "/province")
     public ResponseEntity<Object> createProvince(@RequestBody Province pProvince) {
         try {
             // create new province
@@ -82,7 +82,7 @@ public class ProvinceController {
     }
 
     // Update province by id
-    @PutMapping(value = "/province/update/{id}")
+    @PutMapping(value = "/province/{id}")
     public ResponseEntity<Object> updateProvince(@PathVariable Long id, @RequestBody Province pProvince) {
         // find province by id
         Optional<Province> provinceData = pIProvinceRepository.findById(id);
@@ -102,7 +102,7 @@ public class ProvinceController {
     }
 
     // Delete province by Id
-    @DeleteMapping("/province/delete/{id}")
+    @DeleteMapping("/province/{id}")
     public ResponseEntity<Object> deleteProvinceById(@PathVariable Long id) {
         try {
             pIProvinceRepository.deleteById(id);

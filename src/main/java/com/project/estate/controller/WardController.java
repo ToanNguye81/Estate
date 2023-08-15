@@ -39,7 +39,7 @@ public class WardController {
     WardRepository pIWardRepository;
 
     // get all ward
-    @GetMapping(value = "/ward/all")
+    @GetMapping(value = "/ward")
     public ResponseEntity<List<Ward>> getAllWard(
             @RequestParam(value = "page", defaultValue = "0") int page,
             @RequestParam(value = "size", defaultValue = "10") int size) {
@@ -58,7 +58,7 @@ public class WardController {
     }
 
     // get ward by id
-    @GetMapping(value = "/ward/details/{id}")
+    @GetMapping(value = "/ward/{id}")
     public Ward getWardById(@PathVariable Long id) {
         if (pIWardRepository.findById(id).isPresent()) {
             return pIWardRepository.findById(id).get();
@@ -81,7 +81,7 @@ public class WardController {
     }
 
     // Create new ward
-    @PostMapping(value = "/ward/create/{districtId}")
+    @PostMapping(value = "/ward/{districtId}")
     public ResponseEntity<Object> createWard(@PathVariable("districtId") Long districtId,
             @RequestBody Ward pWard) {
         try {
@@ -111,7 +111,7 @@ public class WardController {
     }
 
     // Update ward by id
-    @PutMapping(value = "/ward/update/{id}")
+    @PutMapping(value = "/ward/{id}")
     public ResponseEntity<Object> updateWardById(@PathVariable Long id,
             @RequestBody Ward pWard) {
         // find ward by id
@@ -131,7 +131,7 @@ public class WardController {
     }
 
     // delete ward by id
-    @DeleteMapping(value = "/ward/delete/{id}")
+    @DeleteMapping(value = "/ward/{id}")
     public ResponseEntity<Object> deleteWardById(@PathVariable Long id) {
         try {
             pIWardRepository.deleteById(id);
